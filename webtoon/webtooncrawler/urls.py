@@ -1,9 +1,9 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 # namespcae
 app_name = 'webtooncrawler'
 
-urlpatterns = {
-    path('', views.index, name='index'),
-}
+urlpatterns = [
+    path('index/', views.index, name='index'),
+]

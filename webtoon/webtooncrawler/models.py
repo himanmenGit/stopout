@@ -42,6 +42,7 @@ class Webtoon(models.Model):
                 ep_num = a_href.group('no')
 
             if Episode.objects.filter(episode_id=ep_num).exists():
+                print(ep_title)
                 continue
 
             # 섬네일 url
@@ -87,3 +88,12 @@ class Episode(models.Model):
 
     def __str__(self):
         return f'{self.episode_id}-{self.title}'
+
+# In [1]: from webtooncrawler.models import Webtoon
+#
+# In [2]: w = Webtoon.objects.first()
+#
+# In [3]: w.get_episode_list()
+#
+# In [4]: w.episode_set.all()
+# Out[4]: <QuerySet [<Episode: 12-몫>, <Episode: 11-다정함>, <Episode: 10-이해>, <Episode: 9-신호>, <Episode: 8-온도>, <Episode: 7-제자리걸음>, <Epissode: 5-묘연>, <Episode: 4-속울음>, <Episode: 3-가치와 가격>]>

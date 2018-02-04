@@ -2,11 +2,11 @@ from bs4 import BeautifulSoup
 import re
 import requests
 
-
 class EpisodeData:
 
-    def __init__(self, episode_id, episode_num, url_thumbnail, title, rating, created_date):
+    def __init__(self, episode_id, webtoon_title, episode_num, url_thumbnail, title, rating, created_date):
         self._episode_id = episode_id
+        self._webtoon_title = webtoon_title
         self._episode_num = episode_num
         self._url_thumbnail = url_thumbnail
         self._title = title
@@ -16,6 +16,10 @@ class EpisodeData:
     @property
     def episode_id(self):
         return self._episode_id
+
+    @property
+    def episode_id(self):
+        return self._webtoon_title
 
     @property
     def episode_num(self):
@@ -41,7 +45,8 @@ class EpisodeData:
         pass
 
     def __str__(self):
-        return f'episode_id: {self._episode_id}, ' \
+        return f'webtoon title: {self._webtoon_title}, ' \
+               f'episode_id: {self._episode_id}, ' \
                f'episode_num: {self._episode_num}, ' \
                f'url_thumbnail: {self._url_thumbnail}, ' \
                f'title: {self._title}, ' \
@@ -60,6 +65,11 @@ def get_episode_list(webtoon_id, page):
 
     soup = BeautifulSoup(response.text, 'lxml')
     ep_tr = soup.select('#content > table > tr')
+
+    webtoon_title_h2 = soup.select_one('#content > div.comicinfo > div.detail > h2')
+    if webtoon_title_h2:
+        webtoon_title = webtoon_title_h2.contents[0].strip()
+
     episode_list = list()
     for ep in ep_tr:
         ep_num = None
@@ -100,6 +110,7 @@ def get_episode_list(webtoon_id, page):
 
         ep_data = EpisodeData(
             episode_id=webtoon_id,
+            webtoon_title=webtoon_title,
             episode_num=ep_num,
             url_thumbnail=ep_thumbnail_url,
             title=ep_title,

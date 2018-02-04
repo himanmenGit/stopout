@@ -5,5 +5,6 @@ from . import views
 app_name = 'webtooncrawler'
 
 urlpatterns = [
-    path('index/', views.index, name='index'),
+    path('', views.webtoon_list, name='list'),
+    path('<int:webtoon_pk>/', views.webtoon_detail, name='detail'),
 ]

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if webtoon_list %}
+<h1>{{ webtoon.title }}</h1>
+
+    {% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+    <ul>
+    {% for webtoon in webtoon_list %}
+        <li>
+        <p>ID:{{ webtoon.pk }} TITLE: <a href="{% url 'webtooncrawler:detail' webtoon_pk=webtoon.pk %}">{{ webtoon.title }}</a></p>
+        </li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

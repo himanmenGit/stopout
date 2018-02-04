@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if webtoon %}
+    <h1>{{ webtoon.title }}</h1>
+
+    {% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+
+    <ul>
+    {% for episode in webtoon.episode_set.all %}
+        <li>TITLE: {{ episode.title }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

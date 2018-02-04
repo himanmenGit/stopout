@@ -5,8 +5,9 @@ import requests
 
 class EpisodeData:
 
-    def __init__(self, episode_id, url_thumbnail, title, rating, created_date):
+    def __init__(self, episode_id, episode_num, url_thumbnail, title, rating, created_date):
         self._episode_id = episode_id
+        self._episode_num = episode_num
         self._url_thumbnail = url_thumbnail
         self._title = title
         self._rating = rating
@@ -15,6 +16,10 @@ class EpisodeData:
     @property
     def episode_id(self):
         return self._episode_id
+
+    @property
+    def episode_num(self):
+        return self._episode_num
 
     @property
     def url_thumbnail(self):
@@ -37,6 +42,7 @@ class EpisodeData:
 
     def __str__(self):
         return f'episode_id: {self._episode_id}, ' \
+               f'episode_num: {self._episode_num}, ' \
                f'url_thumbnail: {self._url_thumbnail}, ' \
                f'title: {self._title}, ' \
                f'rating: {self._rating}, ' \
@@ -56,7 +62,7 @@ def get_episode_list(webtoon_id, page):
     ep_tr = soup.select('#content > table > tr')
     episode_list = list()
     for ep in ep_tr:
-        ep_id = None
+        ep_num = None
         ep_thumbnail_url = None
         ep_title = None
         ep_rating = None
@@ -70,7 +76,7 @@ def get_episode_list(webtoon_id, page):
         # href의 no를 가져옴
         a_href = pattern.search(id_td_a.attrs['href'])
         if a_href:
-            ep_id = a_href.group('no')
+            ep_num = a_href.group('no')
 
         # 섬네일 url
         thumbnail_url = id_td_a.find('img')['src']
@@ -93,7 +99,8 @@ def get_episode_list(webtoon_id, page):
             ep_created_date = created_td.get_text()
 
         ep_data = EpisodeData(
-            episode_id=ep_id,
+            episode_id=webtoon_id,
+            episode_num=ep_num,
             url_thumbnail=ep_thumbnail_url,
             title=ep_title,
             rating=ep_rating,

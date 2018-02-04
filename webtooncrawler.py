@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import re
 import requests
 
+
 class EpisodeData:
 
     def __init__(self, episode_id, webtoon_title, episode_num, url_thumbnail, title, rating, created_date):
@@ -123,6 +124,6 @@ def get_episode_list(webtoon_id, page):
 
 
 if __name__ == '__main__':
-    episode_list = get_episode_list(703835, 1)
+    episode_list = get_episode_list(670415, 1)
     for episode in episode_list:
         print(episode)

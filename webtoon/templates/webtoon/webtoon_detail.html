@@ -10,7 +10,9 @@
 
     <ul>
     {% for episode in webtoon.episode_set.all %}
-        <li>TITLE: {{ episode.title }}</li>
+        <li>
+            {{ episode.episode_id }}화:
+            <a href="https://comic.naver.com/webtoon/detail.nhn?titleId={{ webtoon.webtoon_id }}&no={{ episode.episode_id }}">{{ episode.title }}</a></li>
     {% endfor %}
     </ul>
 {% endif %}

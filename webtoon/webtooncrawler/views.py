@@ -13,6 +13,7 @@ def webtoon_list(request):
 
 def webtoon_detail(request, webtoon_pk):
     webtoon = get_object_or_404(Webtoon, pk=webtoon_pk)
+    webtoon.get_episode_list()
     context = {
         'webtoon': webtoon,
     }

@@ -10,7 +10,7 @@
     <ul>
     {% for webtoon in webtoon_list %}
         <li>
-        <p>ID:{{ webtoon.pk }} TITLE: <a href="{% url 'webtooncrawler:detail' webtoon_pk=webtoon.pk %}">{{ webtoon.title }}</a></p>
+        <p>PK:{{ webtoon.pk }} TITLE: <a href="{% url 'webtooncrawler:detail' webtoon_pk=webtoon.pk %}">{{ webtoon.title }}</a></p>
         </li>
     {% endfor %}
     </ul>

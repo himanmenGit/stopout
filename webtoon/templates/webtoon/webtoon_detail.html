@@ -11,8 +11,12 @@
     <ul>
     {% for episode in webtoon.episode_set.all %}
         <li>
-            {{ episode.episode_id }}화:
-            <a href="https://comic.naver.com/webtoon/detail.nhn?titleId={{ webtoon.webtoon_id }}&no={{ episode.episode_id }}">{{ episode.title }}</a></li>
+            {{ episode.episode_id }}화: |
+            <a href="https://comic.naver.com/webtoon/detail.nhn?titleId={{ webtoon.webtoon_id }}&no={{ episode.episode_id }}">{{ episode.title }}</a> |
+            {{ episode.rating }} |
+            {{ episode.created_date }}
+        </li>
+
     {% endfor %}
     </ul>
 {% endif %}

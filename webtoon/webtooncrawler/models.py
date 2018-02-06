@@ -9,6 +9,8 @@ class Webtoon(models.Model):
     def __str__(self):
         return f'{self.title}'
 
+    # 추후 웹툰 커버 url 필드 추가 예정
+    # 1 화부터 들고 와서 뿌려주는 기능도 추가 해볼까
     def get_episode_list(self):
         episode_list = crawler.get_episode_list(self.webtoon_id, 1)
 
@@ -30,7 +32,7 @@ class Episode(models.Model):
     episode_id = models.IntegerField(default=0)
     title = models.CharField(max_length=50)
     rating = models.DecimalField(max_digits=4, decimal_places=2)
-    created_date = models.DateTimeField('date published')
+    created_date = models.DateField('date published')
 
     def __str__(self):
         return f'{self.episode_id}-{self.title}'
